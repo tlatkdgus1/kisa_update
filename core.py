@@ -66,3 +66,33 @@ def get_data():
 			'status' : "old"
 		}
 		return dict
+
+
+def get_form(url):
+	data = urllib.urlopen(url)
+	soup = BeautifulSoup.BeautifulSoup(data)
+	data = soup.findAll('td', attrs={'class':'cont'})
+
+	for i in data:
+        	form = str(i.findAll('table'))
+        	form = form.replace("<br />", "\n")
+                form = form.replace("<tr>", "")
+                form = form.replace("</tr>", "")
+                form = form.replace("<td>", "")
+                form = form.replace("</td>", "")
+                form = form.replace("&nbsp;o", " ")
+                form = form.replace("&nbsp;", "")
+                form = form.replace("<table>", "")
+                form = form.replace("</table>", "")
+                form = form.replace("<p>", "")
+                form = form.replace("</p>", "")
+                form = form.replace("<u>", "")
+                form = form.replace("</u>", "")
+                form = form.replace("<a>", "")
+                form = form.replace("</a>", "")
+                form = form.replace("&lsquo;", "'")
+                form = form.replace("&rsquo;", "'")
+                form = form.replace("<a href=\"", "")
+                form = form.replace("\">", "")
+		
+		return form
